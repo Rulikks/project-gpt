@@ -34,6 +34,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingVertical: 10,
     borderRadius: 4,
+    flexDirection: "row",
+    alignItems: "center"
   },
   newChatText: {
     color: "white",
@@ -68,7 +70,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 5,
-    height: "5%",
+    height: "5.6%",
   },
   desingedByText: {
     color: "white",

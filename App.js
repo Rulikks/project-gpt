@@ -2,7 +2,9 @@
 
 import React, { useState } from "react";
 import { View, Text, TouchableOpacity, ScrollView } from "react-native";
-import styles from "./Style"; // style.js dosyasını burada import ediyoruz.
+import styles from "./Style";
+import DeleteSVG from "./components/Delete.js";
+import PlusSVG from "./components/Plus";
 
 export default function Home() {
   const [threds, setThreds] = useState([
@@ -62,11 +64,16 @@ export default function Home() {
       date: "20.12.2023 20:12",
     },
     {
-      id: 12 ,
+      id: 12,
       name: "Lorem Insup",
       date: "20.12.2023 20:12",
     },
   ]);
+
+  const deleteThred = (id) => {
+    const deletedThred = threds.filter((thred) => thred.id !== id);
+    setThreds(deletedThred);
+  };
 
   return (
     <View style={styles.container}>
@@ -81,7 +88,9 @@ export default function Home() {
       <View style={styles.main}>
         <View style={styles.headBar}>
           <TouchableOpacity style={styles.newChat}>
-            <Text style={styles.newChatText}>Yeni Chat</Text>
+            <Text style={styles.newChatText}>
+              <PlusSVG /> Yeni Chat
+            </Text>
           </TouchableOpacity>
         </View>
         <View style={styles.chatContainer}>
@@ -93,16 +102,20 @@ export default function Home() {
                     <Text style={styles.chatItemTitle}>{thred.name}</Text>
                     <Text style={styles.chatItemDate}>{thred.date}</Text>
                   </View>
-                  <View>
-                    <Text>Delete</Text>
-                  </View>
+                  <TouchableOpacity onPress={() => deleteThred(thred.id)}>
+                    <Text>
+                      <DeleteSVG></DeleteSVG>
+                    </Text>
+                  </TouchableOpacity>
                 </View>
               );
             })}
           </ScrollView>
         </View>
         <View style={styles.desingedBy}>
-          <Text style={styles.desingedByText}>Desinged By Soulfly and Leora</Text>
+          <Text style={styles.desingedByText}>
+            ❤️ Desinged By Soulfly and Leora
+          </Text>
         </View>
       </View>
     </View>
