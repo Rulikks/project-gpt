@@ -14,7 +14,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#29323c", // açık renk
     justifyContent: "space-between",
     alignItems: "center",
-    marginBottom: 20,
     padding: 20,
   },
   aiBarText: {
@@ -42,10 +41,12 @@ const styles = StyleSheet.create({
   },
   main: {
     paddingHorizontal: 20,
+    paddingTop: 10,
+    paddingBottom: 10
   },
   chatContainer: {
     height: "80%",
-    marginTop: 5,
+    paddingTop: 5,
   },
   chatItem: {
     backgroundColor: "#29323c", // açık renk
@@ -55,7 +56,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    marginTop: 5,
+    paddingTop: 5,
   },
   chatItemTitle: {
     fontSize: 18,
