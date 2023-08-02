@@ -1,5 +1,3 @@
-// Home.js
-
 import React, { useState, useRef } from "react";
 import {
   View,
@@ -13,83 +11,21 @@ import {
 import styles from "./Style";
 import BackIcon from "./components/Back.js";
 import SendIcon from "./components/Send.js";
+import DownIcon from "./components/Down.js"; 
 
 export default function Home() {
   let [messages, setMessages] = useState([
-    {
-      id: 1,
-      createdAt: "20.12.2023 20:12",
-      content: "Lorem insup",
-      type: "client",
-    },
-    {
-      id: 2,
-      createdAt: "20.12.2023 20:12",
-      content: "Lorem insup",
-      type: "system",
-    },
-    {
-      id: 3,
-      createdAt: "20.12.2023 20:12",
-      content: "Lorem insghfhgfjhgfghup",
-      type: "system",
-    },
-    {
-      id: 4,
-      createdAt: "20.12.2023 20:12",
-      content: "Lorem insup",
-      type: "client",
-    },
-    {
-      id: 5,
-      createdAt: "20.12.2023 20:12",
-      content: "Lorem insup",
-      type: "client",
-    },
-    {
-      id: 6,
-      createdAt: "20.12.2023 20:12",
-      content: "Lorem insup",
-      type: "client",
-    },
-    {
-      id: 7,
-      createdAt: "20.12.2023 20:12",
-      content: "Lorem insup",
-      type: "client",
-    },
-    {
-      id: 8,
-      createdAt: "20.12.2023 20:12",
-      content: "Lorem insup",
-      type: "client",
-    },
-    {
-      id: 9,
-      createdAt: "20.12.2023 20:12",
-      content: "Lorem insup",
-      type: "client",
-    },
-    {
-      id: 10,
-      createdAt: "20.12.2023 20:12",
-      content: "Lorem insup",
-      type: "client",
-    },
+    // ... messages data
   ]);
   const [message, setMessage] = useState("");
   const [keyboardShow, setKeyboardShow] = useState(false);
   const chatScroll = useRef();
-  const sendMessage = (id) => {
-    messages = messages.push({
-      id: messages[messages.length - 1].id + 1,
-      createdAt: "20.12.2023 20:12",
-      content: message,
-      type: "client",
-    });
-    console.log(chatScroll.current.viewConfig.validAttributes.contentOffset);
+  const sendMessage = () => {
+    // sendMessage logic
+  };
+
+  const scrollToBottom = () => {
     chatScroll.current.scrollToEnd({ animated: true });
-    setMessage("");
   };
 
   return (
@@ -159,6 +95,15 @@ export default function Home() {
               );
             })}
           </ScrollView>
+          <TouchableOpacity onPress={scrollToBottom}>
+            <DownIcon
+              style={{
+                position: "absolute",
+                bottom: keyboardShow ? 60 : 10, // Klavye açıldığında ikonun yeri değişsin
+                right: 20,
+              }}
+            />
+          </TouchableOpacity>
         </View>
         <View
           style={{
