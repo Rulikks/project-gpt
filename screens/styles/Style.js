@@ -1,3 +1,4 @@
+
 // style.js
 
 import { StyleSheet } from "react-native";
@@ -7,6 +8,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "flex-start", // ekranın üst kısmına kutuyu yerleştirmek için
     backgroundColor: "#1E2530",
+    height: "100%",
   },
   aiBar: {
     flexDirection: "row",
@@ -19,6 +21,9 @@ const styles = StyleSheet.create({
   aiBarText: {
     color: "#FFFFFF",
     fontSize: 25,
+  },
+  aiBarBackIcon: {
+    marginRight: 10,
   },
   versionText: {
     color: "#FFFFFF",
@@ -34,7 +39,7 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderRadius: 4,
     flexDirection: "row",
-    alignItems: "center"
+    alignItems: "center",
   },
   newChatText: {
     color: "white",
@@ -42,7 +47,8 @@ const styles = StyleSheet.create({
   main: {
     paddingHorizontal: 20,
     paddingTop: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
+    height: "100%",
   },
   chatContainer: {
     height: "80%",
@@ -56,7 +62,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    paddingTop: 5,
+    marginTop: 5,
   },
   chatItemTitle: {
     fontSize: 18,
@@ -70,11 +76,51 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    marginTop: 5,
-    height: "5.6%",
+    marginTop: 10,
   },
   desingedByText: {
     color: "white",
+  },
+  goToBottom: {
+    position: "absolute",
+    left: 10,
+    bottom: 10,
+    backgroundColor: "#29323c",
+    padding: 10,
+    borderRadius: 100,
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  messages: {
+    height: "100%",
+    flex: 1,
+    flexDirection: "row",
+    position: "relative",
+  },
+  messageContainer: {
+    marginTop: 0,
+    flexDirection: "row",
+    alignItems: "center",
+    padding: 10,
+    width: "100%",
+    backgroundColor: "rgba(30, 37, 48, 0.5)",
+  },
+  messageInputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 5,
+    justifyContent: "center",
+    width: "100%",
+    backgroundColor: "rgba(30, 37, 48, 0.5)",
+  },
+  messageInput: {
+    backgroundColor: "white",
+    padding: 15,
+    paddingRight: 50,
+    borderRadius: 50,
+    width: "85%",
+    marginRight: 5
   },
 });
 

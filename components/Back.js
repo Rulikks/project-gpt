@@ -1,9 +1,9 @@
 import { View } from "react-native";
 import Svg, { Path } from "react-native-svg";
 
-export default function DeleteSVG() {
+export default function DeleteSVG(props) {
   return (
-    <View style={{ marginRight: 5 }}>
+    <View style={{ marginRight: 5, ...props.style }}>
       <Svg
         width="13"
         height="22"
