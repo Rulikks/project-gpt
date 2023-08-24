@@ -3,7 +3,9 @@ import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import styles from "./styles/Style";
 import PlusSVG from "../components/Plus";
 import ThredItem from "../components/ThredItem";
-import LoginSVG from '../components/LoginSVG';  
+import LoginSVG from '../components/Login';  
+import Ad from '../components/Ad';  
+
 
 
 export default function Home({ navigation }) {
@@ -81,47 +83,56 @@ export default function Home({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <View style={styles.aiBar}>
+    <View style={styles.aiBar}>
         <View>
-          <Text style={styles.aiBarText}>Chat AI</Text>
+            <Text style={styles.aiBarText}>Chat AI</Text>
         </View>
-        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <View style={styles.box}></View>
-          <View style={styles.box}></View>
-          <View style={styles.thirdBoxContainer}>
-    <LoginSVG width={20} height={20} />
-    <View style={styles.thirdBox}></View>
-</View>
+        <View style={styles.box}>
+        <Text style={styles.reklamizle}>
+          Reklam İzle Kazan!
+          </Text>
+            <Ad width={20} height={20} style={styles.Ad} />  
         </View>
-      </View>
-      <View style={styles.main}>
-        <View style={styles.headBar}>
-          <TouchableOpacity style={styles.newChat}>
-            <Text style={styles.newChatText}>
-              <PlusSVG /> Yeni Chat
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View style={styles.chatContainer}>
-          <ScrollView>
-            {threds.map((thred) => {
-              return (
-                <ThredItem
-                  key={thred.id}
-                  item={thred}
-                  onDelete={deleteThred}
-                  onClick={showThred}
-                />
-              );
-            })}
-          </ScrollView>
-        </View>
-        <View style={styles.desingedBy}>
-          <Text style={styles.desingedByText}>
-            ❤️ Desinged By Soulfly and Leora
+        <View style={styles.box}>
+        <Text style={styles.bakiye}>
+          Kalan Bakiyeniz...
           </Text>
         </View>
-      </View>
+        <View style={styles.thirdBoxContainer}>
+            <LoginSVG width={20} height={20} style={styles.svgIcon} />
+            <View style={styles.thirdBox}></View>
+        </View>
     </View>
+
+    <View style={styles.main}>
+        <View style={styles.headBar}>
+            <TouchableOpacity style={styles.newChat}>
+                <Text style={styles.newChatText}>
+                    <PlusSVG /> Yeni Chat
+                </Text>
+            </TouchableOpacity>
+        </View>
+        <View style={styles.chatContainer}>
+            <ScrollView>
+                {threds.map((thred) => {
+                    return (
+                        <ThredItem
+                            key={thred.id}
+                            item={thred}
+                            onDelete={deleteThred}
+                            onClick={showThred}
+                        />
+                    );
+                })}
+            </ScrollView>
+        </View>
+        <View style={styles.desingedBy}>
+            <Text style={styles.desingedByText}>
+                ❤️ Desinged By Soulfly and Leora
+            </Text>
+        </View>
+    </View>
+</View>
+
 );
-}
+          }

@@ -123,18 +123,61 @@ const styles = StyleSheet.create({
     marginRight: 5
   },
   
-  box: {
-    width: 63,
-    height: 30,
-    backgroundColor: '#2D5AA0',
-    marginRight: 10,  
-    borderRadius:4,
-    top:5,
-  },
-  thirdBox: {
-    width:35,
+  thirdBoxContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    position: 'relative',
+    width: 63, 
+    height: 24, 
+    marginLeft: 5,  
+},
 
-  },
+thirdBox: {
+    width: '75%',
+    height: '150%',
+    backgroundColor: '#2D5AA0',
+    position: 'absolute', 
+    top: 0,
+    left: 7,
+    zIndex: 0,
+    borderRadius: 4,
+},
+
+svgIcon: {
+    position: 'absolute', 
+    top: '75%',  
+    left: '50%', 
+    transform: [{ translateY: -10 }, { translateX: -10 }],  
+    zIndex: 1
+},
+box: {
+  width: 70,
+  height: '90%',
+  backgroundColor: '#2D5AA0',
+    top: 5,
+    zIndex: 0,
+    borderRadius: 4,
+    marginLeft:20,
+    margin:'-2%',
+
+},
+Ad: {
+  position: 'absolute', 
+  top: '75%',  
+  left: '50%', 
+  transform: [{ translateY: -10 }, { translateX: -10 }],  
+  zIndex: 1
+},
+reklamizle: {
+  color:'white',
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  fontSize:10,
+
+
+
+},
 
 });
 
