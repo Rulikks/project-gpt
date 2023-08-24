@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity, ScrollView } from "react-native";
 import styles from "./styles/Style";
 import PlusSVG from "../components/Plus";
 import ThredItem from "../components/ThredItem";
+import LoginSVG from '../components/LoginSVG';  
+
 
 export default function Home({ navigation }) {
   const [threds, setThreds] = useState([
@@ -83,8 +85,13 @@ export default function Home({ navigation }) {
         <View>
           <Text style={styles.aiBarText}>Chat AI</Text>
         </View>
-        <View>
-          <Text style={styles.versionText}>V1.0.0</Text>
+        <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+          <View style={styles.box}></View>
+          <View style={styles.box}></View>
+          <View style={styles.thirdBoxContainer}>
+    <LoginSVG width={20} height={20} />
+    <View style={styles.thirdBox}></View>
+</View>
         </View>
       </View>
       <View style={styles.main}>
@@ -116,5 +123,5 @@ export default function Home({ navigation }) {
         </View>
       </View>
     </View>
-  );
+);
 }

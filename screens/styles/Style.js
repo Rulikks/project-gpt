@@ -1,6 +1,3 @@
-
-// style.js
-
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -21,6 +18,8 @@ const styles = StyleSheet.create({
   aiBarText: {
     color: "#FFFFFF",
     fontSize: 25,
+    marginLeft:10,
+    marginTop:5,
   },
   aiBarBackIcon: {
     marginRight: 10,
@@ -28,6 +27,7 @@ const styles = StyleSheet.create({
   versionText: {
     color: "#FFFFFF",
     fontSize: 14,
+    right:10,
   },
   headBar: {
     flexDirection: "row",
@@ -122,6 +122,20 @@ const styles = StyleSheet.create({
     width: "85%",
     marginRight: 5
   },
+  
+  box: {
+    width: 63,
+    height: 30,
+    backgroundColor: '#2D5AA0',
+    marginRight: 10,  
+    borderRadius:4,
+    top:5,
+  },
+  thirdBox: {
+    width:35,
+
+  },
+
 });
 
 export default styles;

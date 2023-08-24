@@ -67,7 +67,7 @@ export default function ChatScreen({ navigation, route }) {
     },
     {
       id: 9,
-      content: "Mükkemel.....",
+      content: "Mükemmel.....",
       type: "client",
       createdAt: "010101",
     },
@@ -101,7 +101,6 @@ export default function ChatScreen({ navigation, route }) {
 
   const handleScroll = (event) => {
     setScrollPosition(event.nativeEvent.contentOffset.y);
-    console.log(scrollPosition, event.nativeEvent);
   };
   const thred = route.params.thred;
 
