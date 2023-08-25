@@ -174,9 +174,6 @@ reklamizle: {
   alignItems: "center",
   justifyContent: "center",
   fontSize:10,
-
-
-
 },
 
 });
