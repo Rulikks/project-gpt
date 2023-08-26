@@ -88,9 +88,7 @@ export default function Home({ navigation }) {
             <Text style={styles.aiBarText}>Chat AI</Text>
         </View>
         <View style={styles.box}>
-        <Text style={styles.reklamizle}>
-          Reklam İzle Kazan!
-          </Text>
+        
             <Ad width={20} height={20} style={styles.Ad} />  
         </View>
         <View style={styles.box}>
@@ -102,7 +100,8 @@ export default function Home({ navigation }) {
             <LoginSVG width={20} height={20} style={styles.svgIcon} />
             <View style={styles.thirdBox}></View>
         </View>
-    </View>
+        </View>
+    
 
     <View style={styles.main}>
         <View style={styles.headBar}>

@@ -163,17 +163,13 @@ box: {
 },
 Ad: {
   position: 'absolute', 
-  top: '75%',  
+  top: '50%',  
   left: '50%', 
   transform: [{ translateY: -10 }, { translateX: -10 }],  
   zIndex: 1
 },
-reklamizle: {
-  color:'white',
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "center",
-  fontSize:10,
+bakiye:{
+  fontSize:13,
 },
 
 });

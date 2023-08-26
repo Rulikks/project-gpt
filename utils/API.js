@@ -12,6 +12,12 @@ async function login(email, password) {
   return token;
 }
 
+async function leave() {
+  await request.post("/auth/leave");
+  Global.setToken(null);
+}
+
 export default {
   login,
+  leave,
 };
