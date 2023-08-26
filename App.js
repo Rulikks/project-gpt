@@ -1,5 +1,5 @@
-import * as React from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import React, { useEffect, useState } from "react";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 const Stack = createNativeStackNavigator();
@@ -9,7 +9,7 @@ import ChatScreen from "./screens/Chat";
 import LoginScreen from "./screens/Login";
 import RegisterScreen from "./screens/Register";
 
-export default function App() {
+export default function App({ navigation }) {
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -19,13 +19,13 @@ export default function App() {
           options={{ animationEnabled: false, headerShown: false }}
         />
         <Stack.Screen
-          name="Register"
-          component={RegisterScreen}
+          name="Home"
+          component={HomeScreen}
           options={{ animationEnabled: false, headerShown: false }}
         />
         <Stack.Screen
-          name="Home"
-          component={HomeScreen}
+          name="Register"
+          component={RegisterScreen}
           options={{ animationEnabled: false, headerShown: false }}
         />
         <Stack.Screen

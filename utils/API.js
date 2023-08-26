@@ -12,12 +12,72 @@ async function login(email, password) {
   return token;
 }
 
+async function myProfile() {
+  const token = await Global.token;
+  const profile = await request
+    .post("/user/@me", {}, { headers: { Authorization: token } })
+    .then((res) => res.data);
+  return profile;
+}
+
+async function getConversation() {
+  const token = await Global.token;
+  const conversations = await request
+    .get("/conversation", {}, { headers: { Authorization: token } })
+    .then((res) => res.data);
+  return conversations;
+}
+
+async function deleteConversation(conversationId) {
+  const token = await Global.token;
+  const conversations = await request
+    .delete(
+      `/conversation/${conversationId}`,
+      {},
+      { headers: { Authorization: token } }
+    )
+    .then((res) => res.data);
+  return conversations;
+}
+
+async function getConversationMessages(conversationId) {
+  const token = await Global.token;
+  const conversations = await request
+    .get(
+      `/conversation/${conversationId}/messages`,
+      {},
+      { headers: { Authorization: token } }
+    )
+    .then((res) => res.data);
+  return conversations;
+}
+
+async function createConversationMessage(conversationId, content) {
+  const token = await Global.token;
+  const conversations = await request
+    .post(
+      `/conversation/${conversationId}/messages`,
+      { content },
+      { headers: { Authorization: token } }
+    )
+    .then((res) => res.data);
+  return conversations;
+}
+
 async function leave() {
-  await request.post("/auth/leave");
-  Global.setToken(null);
+  Global.setToken("");
 }
 
 export default {
   login,
   leave,
+  myProfile,
+  conversation: {
+    list: getConversation,
+    delete: deleteConversation,
+    messages: {
+      list: getConversationMessages,
+      create: getConversationMessages,
+    },
+  },
 };
