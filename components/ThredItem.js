@@ -9,12 +9,16 @@ export default (props) => {
       onPress={() => props.onClick(props.item)}
     >
       <View>
-        <Text style={styles.chatItemTitle}>{props.item.name}</Text>
-        <Text style={styles.chatItemDate}>{props.item.date}</Text>
+        <Text style={styles.chatItemTitle}>
+          {props.item.title.length >= 25
+            ? props.item.title.slice(0, 25) + "..."
+            : props.item.title}
+        </Text>
+        <Text style={styles.chatItemDate}>{props.item.createdAt}</Text>
       </View>
       <TouchableOpacity
         style={{ zIndex: 1 }}
-        onPress={() => props.onDelete(props.item.id)}
+        onPress={() => props.onDelete(props.item._id)}
       >
         <Text>
           <DeleteSVG></DeleteSVG>

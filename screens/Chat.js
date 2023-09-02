@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   View,
   Text,
@@ -12,97 +12,53 @@ import styles from "./styles/Style";
 import BackIcon from "../components/Back.js";
 import SendIcon from "../components/Send.js";
 import DownIcon from "../components/Down.js";
+import API from "../utils/API";
+import moment from "moment";
 
 export default function ChatScreen({ navigation, route }) {
-  let [messages, setMessages] = useState([
-    // ... messages data
-    {
-      id: 1,
-      content: "selam naber",
-      type: "client",
-      createdAt: "010101",
-    },
-    {
-      id: 2,
-      content: "Merhaba iyim sen nasılsın?",
-      type: "system",
-      createdAt: "010101",
-    },
-    {
-      id: 3,
-      content: "ben mükkemelim canım sıkıldı biraz.",
-      type: "client",
-      createdAt: "010101",
-    },
-    {
-      id: 4,
-      content: "senin için ne yapmamamı istersiniz?",
-      type: "system",
-      createdAt: "010101",
-    },
-    {
-      id: 5,
-      content: "bana bir masal anlatırmısın?",
-      type: "client",
-      createdAt: "010101",
-    },
-    {
-      id: 6,
-      content: "Tabiki!!",
-      type: "system",
-      createdAt: "010101",
-    },
-    {
-      id: 7,
-      content: "Başlıyoruz....",
-      type: "system",
-      createdAt: "010101",
-    },
-   
-    {
-      id: 8,
-      content: "Bir okulda okuyan birbirlerini tanımayan iki masum genç varmış ve yolları bir hoca sayesinde kesişmiş ve ikisininde bilmediği şey varmış ömürlerini beraber geçirme fırsatı. bu iki genç birbirlerine aşık olurlar ve ikisininde hedefi olan şeye ulaşmak için beraber yola atırnırlar. yollarında bir sürü kavga çatışma çıksada bu iki kişinin sevgisi onun önüne geçemez.",
-      type: "system",
-      createdAt: "010101",
-    },
-    {
-      id: 9,
-      content: "Mükemmel.....",
-      type: "client",
-      createdAt: "010101",
-    },
-    {
-      id: 10,
-      content: "Bu iki genç hayla beraberliğini sürdürmekte ve ömür boyu sürdürecektir.",
-      type: "system",
-      createdAt: "010101",
-    },
-    {
-      id: 11,
-      content: "Bu ikisinin sevgisi bir ömür birbirlerine saklıdır.",
-      type: "system",
-      createdAt: "010101",
-    },
-  ]);
+  let [messages, setMessages] = useState([]);
   const [message, setMessage] = useState("");
-  const [scrollPosition, setScrollPosition] = useState(0);
   const chatScroll = useRef();
-  const sendMessage = () => {
-    // sendMessage logic
-  };
 
+  const thred = route.params.thred;
   const scrollToBottom = () => {
     chatScroll.current.scrollToEnd({ animated: true });
   };
+  const sendMessage = () => {
+    messages = [
+      ...messages,
+      {
+        _id: Date.now(),
+        content: message,
+        role: "user",
+        createdAt: moment().fromNow(),
+      },
+    ];
+    setMessages(messages);
+    setMessage("");
+    scrollToBottom();
+    API.conversation.messages.create(thred?._id, message).then((res) => {
+      console.log(res)
+      messages = [...messages, res];
+      setMessages(messages);
+      setTimeout(() => chatScroll.current.scrollToEnd({ animated: true }), 300);
+    });
+  };
+  useEffect(() => {
+    if (thred) {
+      API.conversation.messages.list(thred._id).then((data) => {
+        setMessages(data);
+        setTimeout(
+          () => chatScroll.current.scrollToEnd({ animated: true }),
+          300
+        );
+      });
+    }
+  }, []);
 
   const backTo = () => {
     navigation.goBack();
   };
-
-  const handleScroll = (event) => {
-    setScrollPosition(event.nativeEvent.contentOffset.y);
-  };
-  const thred = route.params.thred;
 
   return (
     <KeyboardAvoidingView
@@ -123,24 +79,29 @@ export default function ChatScreen({ navigation, route }) {
           >
             <BackIcon style={{ marginRight: 20 }} />
           </TouchableOpacity>
-          <Text style={styles.aiBarText}>{thred.name}</Text>
+          <Text style={styles.aiBarText}>
+            {thred &&
+              (thred.title.length >= 20
+                ? thred.title.slice(0, 20) + "..."
+                : thred.title)}
+          </Text>
         </View>
       </View>
       <View style={styles.messages}>
-        <ScrollView ref={chatScroll} onScroll={handleScroll}>
+        <ScrollView ref={chatScroll}>
           {messages.map((message, index) => {
-            const isMessageOwner = message.type == "client";
+            const isMessageOwner = message.role == "user";
             const isSendBefore =
-              messages[index - 1] && messages[index - 1].type == message.type;
+              messages[index - 1] && messages[index - 1].type == message.role;
 
             return (
               <View
-                key={message.id}
+                key={message._id}
                 style={{
                   flexDirection: "row",
                   justifyContent: isMessageOwner ? "flex-end" : "flex-start",
                   marginTop: 3,
-                  marginHorizontal: 10
+                  marginHorizontal: 10,
                 }}
               >
                 <View
@@ -171,7 +132,7 @@ export default function ChatScreen({ navigation, route }) {
                     }}
                   >
                     <Text style={{ color: "gray", fontSize: 10 }}>
-                      {message.createdAt}
+                      {moment(message.createdAt).fromNow()}
                     </Text>
                   </View>
                 </View>

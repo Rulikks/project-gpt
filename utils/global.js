@@ -5,6 +5,9 @@ export default class Global {
   static async setToken(token) {
     await AsyncStorage.setItem("token", token);
   }
+  static async removeToken() {
+    await AsyncStorage.removeItem("token");
+  }
   static get token() {
     return new Promise(async (resolve, reject) => {
       AsyncStorage.getItem("token").then(resolve);

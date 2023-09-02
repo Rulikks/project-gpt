@@ -8,20 +8,47 @@ import {
   TouchableOpacity,
 } from "react-native";
 import API from "../utils/API";
-import Global from "../utils/global";
+import Message from "../components/Message";
 
 function LoginScreen({ navigation }) {
   const [email, setMail] = useState("");
   const [password, setPassword] = useState("");
+  const [message, setMessage] = useState();
+
+  let timer = null;
+  const startTimer = () => {
+    if (timer) {
+      clearTimeout(timer);
+      timer = null;
+    }
+    timer = setTimeout(() => {
+      setMessage(null);
+    }, 3000);
+  };
 
   const loginAccount = async () => {
+    if (!email && !password) {
+      setMessage({
+        content: "Lütfen mail ve parolanızı giriniz.",
+        type: "error",
+      });
+      return startTimer();
+    }
     const token = await API.login(email, password);
-    console.log(token)
+    if (!token) {
+      setMessage({
+        content: "Mail veya Parola hatalı.",
+        type: "error",
+      });
+      return startTimer();
+    }
     navigation.navigate("Home");
   };
 
   return (
     <View style={styles.container}>
+      {message && <Message message={message.content} type={message.type} />}
+
       <Text style={styles.headerText}>Chat AI</Text>
 
       <TextInput

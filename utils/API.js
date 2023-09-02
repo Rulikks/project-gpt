@@ -8,7 +8,19 @@ async function login(email, password) {
       password,
     })
     .then((res) => res.data);
-  Global.setToken(token);
+  if(token) Global.setToken(token);
+  return token;
+}
+
+async function register(email, username, password) {
+  const { token } = await request
+    .post("/auth/register", {
+      email,
+      username,
+      password,
+    })
+    .then((res) => res.data);
+  if(token) Global.setToken(token);
   return token;
 }
 
@@ -23,7 +35,7 @@ async function myProfile() {
 async function getConversation() {
   const token = await Global.token;
   const conversations = await request
-    .get("/conversation", {}, { headers: { Authorization: token } })
+    .get("/conversation", { headers: { Authorization: token } })
     .then((res) => res.data);
   return conversations;
 }
@@ -31,11 +43,9 @@ async function getConversation() {
 async function deleteConversation(conversationId) {
   const token = await Global.token;
   const conversations = await request
-    .delete(
-      `/conversation/${conversationId}`,
-      {},
-      { headers: { Authorization: token } }
-    )
+    .delete(`/conversation/${conversationId}`, {
+      headers: { Authorization: token },
+    })
     .then((res) => res.data);
   return conversations;
 }
@@ -43,11 +53,9 @@ async function deleteConversation(conversationId) {
 async function getConversationMessages(conversationId) {
   const token = await Global.token;
   const conversations = await request
-    .get(
-      `/conversation/${conversationId}/messages`,
-      {},
-      { headers: { Authorization: token } }
-    )
+    .get(`/conversation/${conversationId}/messages`, {
+      headers: { Authorization: token },
+    })
     .then((res) => res.data);
   return conversations;
 }
@@ -56,8 +64,8 @@ async function createConversationMessage(conversationId, content) {
   const token = await Global.token;
   const conversations = await request
     .post(
-      `/conversation/${conversationId}/messages`,
-      { content },
+      `/conversation/messages`,
+      { content, conversationId },
       { headers: { Authorization: token } }
     )
     .then((res) => res.data);
@@ -65,10 +73,11 @@ async function createConversationMessage(conversationId, content) {
 }
 
 async function leave() {
-  Global.setToken("");
+  Global.removeToken();
 }
 
 export default {
+  register,
   login,
   leave,
   myProfile,
@@ -77,7 +86,7 @@ export default {
     delete: deleteConversation,
     messages: {
       list: getConversationMessages,
-      create: getConversationMessages,
+      create: createConversationMessage,
     },
   },
 };
