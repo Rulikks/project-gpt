@@ -64,6 +64,14 @@ function RegisterScreen({ navigation }) {
     <View style={styles.container}>
       {message && <Message message={message.content} type={message.type} />}
       <Text style={styles.headerText}>Chat AI</Text>
+      <TouchableOpacity 
+    style={styles.goBackButton} 
+    onPress={() => navigation.navigate("Login")}
+>
+    <Text style={styles.goBackButtonText}>Geri Dön</Text>
+</TouchableOpacity>
+
+
 
       <TextInput
         style={styles.input}
@@ -127,6 +135,30 @@ const styles = StyleSheet.create({
     color: "white",
     fontSize: 16,
   },
+  goBackButton: {
+    position: 'absolute',
+    top: '5%',
+    left: 10,
+    padding: 10,
+    backgroundColor: '#404040', // pastel mavi renk
+    borderRadius: 20,  // köşeleri daha yuvarlak
+    elevation: 2,     // Android için gölge efekti
+    shadowColor: "#000",  // iOS için gölge efekti
+    
+    shadowOffset: {
+        width: 0,
+        height: 2
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84
+},
+goBackButtonText: {
+    color: "white",
+    fontSize: 16,      // metin boyutunu artırdık
+    fontWeight: 'bold'  // metini kalınlaştırdık
+}
+
+
 });
 
 export default RegisterScreen;
